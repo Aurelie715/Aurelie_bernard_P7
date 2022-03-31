@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <header class="header">
+        <img src="" alt="">
+    </header>
+    <main class="main">
+        <form class="search">
+            <input type="search" placeholder="Rechercher une recette" name="search" class="search__bar">
+            <button type="submit"><i class="fa fa-search search__icon"></i></button>
+        </form>
+        <div class="tag">
+
+        </div>
+        <div class="filter">
+            <input list="filter-btn-ingredients" name="filter-btn-ingredients" class="filter-btn__text--ingredients" />
+            <datalist id="filter-btn-ingredients">
+                <option value="">
+            </datalist>
+            <input list="filter-btn-appareils" name="filter-btn-appareils" class="filter-btn__text--appareils" />
+            <datalist id="filter-btn-appareils">
+                <option value="">
+            </datalist>
+            <input list="filter-btn-ustensiles" name="filter-btn-ustensiles" class="filter-btn__text--ustensiles" />
+            <datalist id="filter-btn-ustensiles">
+                <option value="">
+            </datalist>
+        </div>
+        <section class="recipes">
+            <div class="recipe">
+                <div class="recipe__img">
+
+                </div>
+                <div class="recipe__explanation">
+                    <div class="recipe-header">
+                        <div class="recipe-header__title"></div>
+                        <div class="recipe-header__time">
+                            <i class="recipe-header__time-icon"></i>
+                        </div>
+                    </div>
+                    <div class="recipe-body">
+                        <div class="recipe-body__ingredients"></div>
+                        <div class="recipe-body__description"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

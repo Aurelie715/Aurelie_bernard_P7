@@ -1,0 +1,19 @@
+{
+  "name": "aurelie_bernard_p7_03_2022",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./public/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aurelie715/Aurelie_bernard_P7.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aurelie715/Aurelie_bernard_P7/issues"
+  },
+  "homepage": "https://github.com/Aurelie715/Aurelie_bernard_P7#readme"
+}
