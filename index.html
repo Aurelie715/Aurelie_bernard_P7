@@ -1,57 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/public/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&family=Roboto&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <script src="https://kit.fontawesome.com/2c03516f22.js" crossorigin="anonymous"></script> -->
+    <script src="./scripts/index.js" defer></script>
 </head>
 
 <body>
     <header class="header">
-        <img src="" alt="">
+        <img src="./assets/logo-les-petits-plats.png" alt="logo les petits plats">
+        <h1>Les petits plats</h1>
     </header>
     <main class="main">
         <form class="search">
             <input type="search" placeholder="Rechercher une recette" name="search" class="search__bar">
-            <button type="submit"><i class="fa fa-search search__icon"></i></button>
+            <button type="submit" class="search__icon"><i class="fa fa-search"></i></button>
         </form>
         <div class="tag">
 
         </div>
-        <div class="filter">
-            <input list="filter-btn-ingredients" name="filter-btn-ingredients" class="filter-btn__text--ingredients" />
-            <datalist id="filter-btn-ingredients">
-                <option value="">
-            </datalist>
-            <input list="filter-btn-appareils" name="filter-btn-appareils" class="filter-btn__text--appareils" />
-            <datalist id="filter-btn-appareils">
-                <option value="">
-            </datalist>
-            <input list="filter-btn-ustensiles" name="filter-btn-ustensiles" class="filter-btn__text--ustensiles" />
-            <datalist id="filter-btn-ustensiles">
-                <option value="">
-            </datalist>
+        <div class="filters">
+            <div class="filter__keyword filter__keyword--ingredients">
+                <div class="keyword-search">
+                    <span class="keyword-search__btn">Ingredients</span>
+                    <input type="text" class="keyword-search__input" placeholder="Rechercher un ingredient"
+                        name="search-input-ingredients" id="search-input-ingredients" />
+                    <div class="keyword-search__icon">
+                        <i class="fa-solid fa-angle-down"></i>
+                        <i class="fa-solid fa-angle-up"></i>
+                    </div>
+                </div>
+                <ul class="keyword-list">
+                    <li>tomate</li>
+                </ul>
+            </div>
+            <div class="filter__keyword filter__keyword--appareils">
+                <div class="keyword-search">
+                    <span class="keyword-search__btn">Appareils</span>
+                    <input type="text" class="keyword-search__input" placeholder="Rechercher un Appareil"
+                        name="search-input-appareils" id="search-input-appareils" />
+                    <div class="keyword-search__icon">
+                        <i class="fa-solid fa-angle-down"></i>
+                        <i class="fa-solid fa-angle-up"></i>
+                    </div>
+                </div>
+                <ul class="keyword-list">
+                    <li>tomate</li>
+                </ul>
+            </div>
+            <div class="filter__keyword filter__keyword--ustensiles">
+                <div class="keyword-search">
+                    <span class="keyword-search__btn">Ustensiles</span>
+                    <input type="text" class="keyword-search__input" placeholder="Rechercher un Ustensile"
+                        name="search-input-ustensiles" id="search-input-ustensiles" />
+                    <div class="keyword-search__icon">
+                        <i class="fa-solid fa-angle-down"></i>
+                        <i class="fa-solid fa-angle-up"></i>
+                    </div>
+                </div>
+                <ul class="keyword-list">
+                    <li>tomate</li>
+                </ul>
+            </div>
+
+
         </div>
         <section class="recipes">
-            <div class="recipe">
-                <div class="recipe__img">
 
-                </div>
-                <div class="recipe__explanation">
-                    <div class="recipe-header">
-                        <div class="recipe-header__title"></div>
-                        <div class="recipe-header__time">
-                            <i class="recipe-header__time-icon"></i>
-                        </div>
-                    </div>
-                    <div class="recipe-body">
-                        <div class="recipe-body__ingredients"></div>
-                        <div class="recipe-body__description"></div>
-                    </div>
-                </div>
-            </div>
         </section>
     </main>
 </body>
