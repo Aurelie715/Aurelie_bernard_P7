@@ -33,20 +33,45 @@ function displayRecipe(recipes) {
     </article>
     `;
     recipesSection.insertAdjacentHTML("beforeend", templateRecipeSection);
-    // ingredients.forEach((ingredients) => {
-    //   const recipeBody = document.querySelector(".recipe-body");
-    //   const ingredient = ingredients.ingredient;
-    //   const templateIngredient = ``;
-    //   recipeBody.insertAdjacentHTML("afterbegin", templateIngredient);
-    // });
   });
 }
 
+function displayFilterButtons(recipes) {
+  const keywordListIngredient = document.getElementById("list-ingredient");
+  const keywordListAppareil = document.getElementById("list-appareil");
+  const keywordListUstensile = document.getElementById("list-ustensile");
+
+  const ingredientNames = recipes.flatMap(({ ingredients }) =>
+    ingredients.map(({ ingredient }) => ingredient)
+  );
+  const uniqueIngredients = [...new Set(ingredientNames)]
+    .map((ingredient) => `<li>${ingredient}</li>`)
+    .join("");
+  keywordListIngredient.insertAdjacentHTML(
+    "beforeend",
+    uniqueIngredients.toLowerCase()
+  );
+
+  const appareilNames = recipes.map(({ appliance }) => appliance);
+  const uniqueAppareil = [...new Set(appareilNames)]
+    .map((appliance) => `<li>${appliance}</li>`)
+    .join("");
+  keywordListAppareil.insertAdjacentHTML("beforeend", uniqueAppareil);
+
+  const ustensileNames = recipes.flatMap(({ ustensils }) => ustensils);
+  const uniqueUstensil = [...new Set(ustensileNames)]
+    .map((ustensils) => `<li>${ustensils}</li>`)
+    .join("");
+  keywordListUstensile.insertAdjacentHTML("beforeend", uniqueUstensil);
+}
+
 function openCloseDropdownButtons() {
-  const dropdown = document.querySelector(".filter__keyword");
-  const button = dropdown.querySelector(".keyword-search__icon");
-  button.addEventListener("click", () => {
-    dropdown.classList.toggle("open");
+  const dropdowns = document.querySelectorAll(".filter__keyword");
+  dropdowns.forEach((dropdown) => {
+    const button = dropdown.querySelector(".keyword-search__icon");
+    button.addEventListener("click", () => {
+      dropdown.classList.toggle("open");
+    });
   });
 }
 
@@ -54,6 +79,7 @@ async function init() {
   const { recipes } = await getRecipes();
   displayRecipe(recipes);
   openCloseDropdownButtons();
+  displayFilterButtons(recipes);
 }
 
 init();

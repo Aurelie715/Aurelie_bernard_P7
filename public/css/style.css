@@ -163,7 +163,7 @@
 
 .filter__keyword.open {
   width: 667px;
-  height: 397px;
+  height: auto;
   align-items: flex-start;
   justify-content: flex-start;
 }
@@ -196,6 +196,14 @@
 }
 .filter__keyword.open .keyword-search .fa-angle-down {
   display: none;
+}
+.filter__keyword.open .keyword-list {
+  display: flex;
+}
+.filter__keyword.open .keyword-list li {
+  list-style: none;
+  display: inline-block;
+  width: 33.3333333333%;
 }
 
 .filter__keyword.open .keyword-list {

@@ -172,7 +172,7 @@ $color-ustensile: #ED6454;
 
 .filter__keyword.open {
   width: 667px;
-  height: 397px;
+  height: auto;
   align-items: flex-start;
   justify-content: flex-start;
   .keyword-search {
@@ -205,6 +205,26 @@ $color-ustensile: #ED6454;
       display: none;
     }
   }
+  .keyword-list {
+    // column-width: 50px;
+    // height: 380px;
+
+    // display: flex;
+    // flex-direction: column;
+    // flex-wrap: wrap;
+    display: flex;
+    // flex-direction: row-reverse;
+    // flex-wrap: wrap;
+    // width: 100%;
+    // padding-left: 0;
+    li{
+      list-style: none;
+    display: inline-block;
+    width: calc(100% / 3);
+    // text-align: center;
+    }
+  }
+
 }
 
 .filter__keyword.open .keyword-list {
