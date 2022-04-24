@@ -1,3 +1,5 @@
+let listFilteredRecipes = [];
+
 const getRecipes = async () => {
   const response = await fetch("./data/recipe.json");
   return await response.json();
@@ -47,6 +49,9 @@ function displayFilterButtons(recipes) {
   const keywordListIngredient = document.getElementById("list-ingredient");
   const keywordListAppareil = document.getElementById("list-appareil");
   const keywordListUstensile = document.getElementById("list-ustensile");
+  keywordListIngredient.innerHTML = "";
+  keywordListAppareil.innerHTML = "";
+  keywordListUstensile.innerHTML = "";
 
   const ingredientNames = recipes.flatMap(({ ingredients }) =>
     ingredients.map(({ ingredient }) => ingredient)
@@ -82,44 +87,50 @@ function openCloseDropdownButtons() {
   });
 }
 
-const searchRecipes = (recipes) => {
+const initSearchBar = (recipes) => {
   const search = document.querySelector(".search__bar");
   search.addEventListener("keyup", (event) => {
-    // si la longueur de event.target.value
-    // (ce que l'on a tapé dans la barre de recherche
-    // event -> keyup, target -> input, value -> valeur de l'input)
-    // est plus grand ou égal à 3
-    if (event.target.value.length >= 3) {
-      // searchValue = la valeur de l'input en minuscule
-      const searchValue = event.target.value.toLowerCase();
-      const keywords = searchValue
-        // split scinde searchValue en plusieurs chaine de caractère
-        //(nouvelle chaine chaque fois qu'il y a un espace) et les places dans un tableau
-        .split(" ")
-        // supprime les chaines vides dans le tableau
-        .filter((string) => string.length > 0);
-      // retourne un nouveau tableau contenant toutes les recettes incluant la valeur de l'input
-      const filterByKeyword = recipes.filter((recipe) => {
-        // vérifie que la recette inclut chaque mot clef du tableau
-        return keywords.every((keyword) => {
-          return (
-            // le nom de la recette en minuscule inclut le mot clef
-            recipe.name.toLowerCase().includes(keyword) || //ou
-            // la description de la recette en minuscule le mot clef
-            recipe.description.toLowerCase().includes(keyword) || //ou
-            // dans le tableau des ingredients teste si au moins un ingredient du tableau
-            recipe.ingredients.some(({ ingredient }) =>
-              // en minuscule inclut le mot clef
-              ingredient.toLowerCase().includes(keyword)
-            )
-          );
-        });
-      });
-      displayRecipes(filterByKeyword);
-    } else {
-      displayRecipes(recipes);
-    }
+    filterRecipes(event.target.value, recipes);
   });
+};
+
+const filterRecipes = (search, recipes) => {
+  // si la longueur de event.target.value
+  // (ce que l'on a tapé dans la barre de recherche
+  // event -> keyup, target -> input, value -> valeur de l'input)
+  // est plus grand ou égal à 3
+  if (search.length >= 3) {
+    // searchValue = la valeur de l'input en minuscule
+    const keywords = search
+      .toLowerCase()
+      // split scinde searchValue en plusieurs chaine de caractère
+      //(nouvelle chaine chaque fois qu'il y a un espace) et les places dans un tableau
+      .split(" ")
+      // supprime les chaines vides dans le tableau
+      .filter((string) => string.length > 0);
+    // retourne un nouveau tableau contenant toutes les recettes incluant la valeur de l'input
+    listFilteredRecipes = recipes.filter((recipe) => {
+      // vérifie que la recette inclut chaque mot clef du tableau
+      return keywords.every((keyword) => {
+        return (
+          // le nom de la recette en minuscule inclut le mot clef
+          recipe.name.toLowerCase().includes(keyword) || //ou
+          // la description de la recette en minuscule le mot clef
+          recipe.description.toLowerCase().includes(keyword) || //ou
+          // dans le tableau des ingredients teste si au moins un ingredient du tableau
+          recipe.ingredients.some(({ ingredient }) =>
+            // en minuscule inclut le mot clef
+            ingredient.toLowerCase().includes(keyword)
+          )
+        );
+      });
+    });
+    displayRecipes(listFilteredRecipes);
+    displayFilterButtons(listFilteredRecipes);
+  } else {
+    displayRecipes(recipes);
+    displayFilterButtons(recipes);
+  }
 };
 
 async function init() {
@@ -127,7 +138,7 @@ async function init() {
   displayRecipes(recipes);
   openCloseDropdownButtons();
   displayFilterButtons(recipes);
-  searchRecipes(recipes);
+  initSearchBar(recipes);
 }
 
 init();
