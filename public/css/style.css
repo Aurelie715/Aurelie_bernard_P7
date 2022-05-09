@@ -30,23 +30,13 @@
 }
 .search__bar, .search__icon {
   border: unset;
-  background-color: #E7E7E7;
+  background-color: #e7e7e7;
   border-radius: 5px;
 }
 .search__icon {
   margin-left: -10px;
   font-size: 32px;
   padding-right: 18px;
-}
-
-.filter {
-  display: flex;
-  width: 170px;
-  height: 69px;
-}
-.filter .filter-btn__icon {
-  position: absolute;
-  right: 10px;
 }
 
 .recipes {
@@ -61,11 +51,11 @@
 }
 .recipe__img {
   height: 178px;
-  background-color: #C7BEBE;
+  background-color: #c7bebe;
 }
 .recipe__explanation {
   padding: 20px 20px 0 20px;
-  background-color: #E7E7E7;
+  background-color: #e7e7e7;
   height: 166px;
 }
 
@@ -138,13 +128,13 @@
   justify-content: center;
 }
 .filter__keyword--ingredients {
-  background-color: #3282F7;
+  background-color: #3282f7;
 }
 .filter__keyword--appareils {
-  background-color: #68D9A4;
+  background-color: #68d9a4;
 }
 .filter__keyword--ustensiles {
-  background-color: #ED6454;
+  background-color: #ed6454;
 }
 .filter__keyword .keyword-search {
   display: flex;

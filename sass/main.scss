@@ -1,11 +1,10 @@
 //colors variables
 $title-color: #d04f4f;
-$light-grey: #E7E7E7;
-$img-color: #C7BEBE;
-$color-ingredient: #3282F7;
-$color-appareil: #68D9A4;
-$color-ustensile: #ED6454;
-
+$light-grey: #e7e7e7;
+$img-color: #c7bebe;
+$color-ingredient: #3282f7;
+$color-appareil: #68d9a4;
+$color-ustensile: #ed6454;
 
 .header {
   margin-top: 42px;
@@ -33,10 +32,11 @@ $color-ustensile: #ED6454;
     width: 100%;
     height: 69px;
     text-indent: 24px;
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
     font-size: 18px;
   }
-  &__bar, &__icon {
+  &__bar,
+  &__icon {
     border: unset;
     background-color: $light-grey;
     border-radius: 5px;
@@ -45,16 +45,6 @@ $color-ustensile: #ED6454;
     margin-left: -10px;
     font-size: 32px;
     padding-right: 18px;
-  }
-}
-
-.filter{
-  display: flex;
-  width: 170px;
-  height: 69px;
-  .filter-btn__icon {
-    position: absolute;
-    right: 10px;
   }
 }
 
@@ -82,7 +72,7 @@ $color-ustensile: #ED6454;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   &__title {
     margin-block-start: unset;
     margin-block-end: unset;
@@ -109,7 +99,7 @@ $color-ustensile: #ED6454;
     text-decoration: none;
     padding-right: 10px;
     overflow: hidden;
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
     font-size: 12px;
     font-weight: 700;
   }
@@ -119,13 +109,13 @@ $color-ustensile: #ED6454;
     margin-block-start: unset;
     margin-block-end: unset;
   }
-  &__ingredients span{
+  &__ingredients span {
     font-weight: 400;
   }
   &__description {
     flex-basis: 50%;
     overflow: hidden;
-    font-family: 'roboto', sans-serif;
+    font-family: "roboto", sans-serif;
     font-size: 12px;
     font-weight: 400;
   }
@@ -135,6 +125,16 @@ $color-ustensile: #ED6454;
   margin-top: 20px;
   display: flex;
 }
+
+// .filter{
+//   display: flex;
+//   width: 170px;
+//   height: 69px;
+//   .filter-btn__icon {
+//     position: absolute;
+//     right: 10px;
+//   }
+// }
 
 .filter__keyword {
   margin-right: 20px;
@@ -154,15 +154,15 @@ $color-ustensile: #ED6454;
   &--ustensiles {
     background-color: $color-ustensile;
   }
-  .keyword-search{
+  .keyword-search {
     display: flex;
-    font-family: 'lato', sans-serif;
+    font-family: "lato", sans-serif;
     color: white;
     &__btn {
       margin-right: 35px;
     }
     &__input {
-      display: none
+      display: none;
     }
     .fa-angle-up {
       display: none;
@@ -189,7 +189,7 @@ $color-ustensile: #ED6454;
     }
     &__input::placeholder {
       padding-left: 20px;
-      font-family: 'lato', sans-serif;
+      font-family: "lato", sans-serif;
       font-size: 18px;
       font-weight: 700;
       color: white;
@@ -207,15 +207,14 @@ $color-ustensile: #ED6454;
   }
   .keyword-list {
     display: flex;
-    li{
+    li {
       list-style: none;
-    display: inline-block;
-    width: calc(100% / 3);
-    color: white;
-    font-family: "lato", sans-serif;
+      display: inline-block;
+      width: calc(100% / 3);
+      color: white;
+      font-family: "lato", sans-serif;
     }
   }
-
 }
 
 .filter__keyword.open .keyword-list {
