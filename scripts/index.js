@@ -24,12 +24,7 @@ function displayRecipes(recipes) {
   recipesSection.innerHTML = "";
   recipes.forEach((recipe) => {
     const { name, ingredients, time, description } = recipe;
-    const listeIngredients = ingredients
-      .map(
-        ({ ingredient, quantity, unit }) =>
-          `<li>${ingredient}: <span>${quantity ?? ""} ${unit ?? ""}</span></li>`
-      )
-      .join("");
+    const listeIngredients = ingredients.map(({ ingredient, quantity, unit }) => `<li>${ingredient}: <span>${quantity ?? ""} ${unit ?? ""}</span></li>`).join("");
     const templateRecipeSection = `
     <article class="recipe">
       <div class="recipe__img">
@@ -54,9 +49,7 @@ function displayRecipes(recipes) {
 }
 
 const getKeywordsAdvancedSearch = (recipes) => {
-  const ingredientNames = recipes.flatMap(({ ingredients }) =>
-    ingredients.map(({ ingredient }) => ingredient)
-  );
+  const ingredientNames = recipes.flatMap(({ ingredients }) => ingredients.map(({ ingredient }) => ingredient));
   const appareilNames = recipes.map(({ appliance }) => appliance);
   const ustensileNames = recipes.flatMap(({ ustensils }) => ustensils);
 
@@ -69,9 +62,7 @@ const getKeywordsAdvancedSearch = (recipes) => {
 function displayAdvancedSearchIngredient(ingredients) {
   const keywordListIngredient = document.getElementById("list-ingredient");
   keywordListIngredient.innerHTML = "";
-  const ingredientHTML = ingredients
-    .map((ingredient) => `<li>${ingredient.toLowerCase()}</li>`)
-    .join("");
+  const ingredientHTML = ingredients.map((ingredient) => `<li>${ingredient.toLowerCase()}</li>`).join("");
   keywordListIngredient.insertAdjacentHTML("beforeend", ingredientHTML);
   keywordListIngredient.querySelectorAll("li").forEach((ingredient) => {
     ingredient.addEventListener("click", () => {
@@ -84,8 +75,14 @@ function addTagIngredient(name) {
   if (tagsIngredient.indexOf(name) === -1) {
     tagsIngredient.push(name);
     const tag = document.querySelector(".tag");
-    const templateTagIngredient = `<div class="tag--ingredient">${name}<div>`;
-    tag.insertAdjacentHTML("beforeend", templateTagIngredient);
+    const templateTagIngredient = document.createElement("div");
+    templateTagIngredient.innerHTML = `<div class="tag__element tag__element--ingredient">${name}<i class="fa-regular fa-circle-xmark"></i></div>`;
+    templateTagIngredient.querySelector(".fa-regular").addEventListener("click", (event) => {
+      tagsIngredient.splice(tagsIngredient.indexOf(name), 1);
+      event.currentTarget.closest(".tag__element").remove();
+      filterRecipes();
+    });
+    tag.appendChild(templateTagIngredient.firstChild);
     filterRecipes();
   }
 }
@@ -93,9 +90,7 @@ function addTagIngredient(name) {
 function displayAdvancedSearchAppareil(appareils) {
   const keywordListAppareil = document.getElementById("list-appareil");
   keywordListAppareil.innerHTML = "";
-  const appareilHTML = appareils
-    .map((appliance) => `<li>${appliance.toLowerCase()}</li>`)
-    .join("");
+  const appareilHTML = appareils.map((appliance) => `<li>${appliance.toLowerCase()}</li>`).join("");
   keywordListAppareil.insertAdjacentHTML("beforeend", appareilHTML);
   keywordListAppareil.querySelectorAll("li").forEach((appliance) => {
     appliance.addEventListener("click", () => {
@@ -108,7 +103,7 @@ function addTagAppareil(name) {
   if (tagsAppareil.indexOf(name) === -1) {
     tagsAppareil.push(name);
     const tag = document.querySelector(".tag");
-    const templateTagAppareil = `<div class="tag--appareil">${name}<div>`;
+    const templateTagAppareil = `<div class="tag__element tag__element--appareil">${name}<i class="fa-regular fa-circle-xmark"></i></div>`;
     tag.insertAdjacentHTML("beforeend", templateTagAppareil);
     filterRecipes();
   }
@@ -118,9 +113,7 @@ function displayAdvancedSearchUstensile(ustensiles) {
   const keywordListUstensile = document.getElementById("list-ustensile");
   keywordListUstensile.innerHTML = "";
 
-  const ustensilHTML = ustensiles
-    .map((ustensil) => `<li>${ustensil.toLowerCase()}</li>`)
-    .join("");
+  const ustensilHTML = ustensiles.map((ustensil) => `<li>${ustensil.toLowerCase()}</li>`).join("");
   keywordListUstensile.insertAdjacentHTML("beforeend", ustensilHTML);
   keywordListUstensile.querySelectorAll("li").forEach((ustensil) => {
     ustensil.addEventListener("click", () => {
@@ -133,7 +126,7 @@ function addTagUstensile(name) {
   if (tagsUstensil.indexOf(name) === -1) {
     tagsUstensil.push(name);
     const tag = document.querySelector(".tag");
-    const templateTagUstensile = `<div class="tag--ustensile">${name}<div>`;
+    const templateTagUstensile = `<div class="tag__element tag__element--ustensile">${name}<i class="fa-regular fa-circle-xmark"></i></div>`;
     tag.insertAdjacentHTML("beforeend", templateTagUstensile);
     filterRecipes();
   }
@@ -174,12 +167,7 @@ const initSearchBar = () => {
 };
 
 const filterRecipes = () => {
-  if (
-    searchString.length < 3 &&
-    tagsIngredient.length === 0 &&
-    tagsAppareil.length === 0 &&
-    tagsUstensil.length === 0
-  ) {
+  if (searchString.length < 3 && tagsIngredient.length === 0 && tagsAppareil.length === 0 && tagsUstensil.length === 0) {
     getKeywordsAdvancedSearch(allRecipes);
     displayRecipes(allRecipes);
     displayAdvancedSearchIngredient(listFilteredRecipesIngredients);
@@ -223,9 +211,7 @@ const filterRecipes = () => {
 
   tagsIngredient.forEach((tagIngredient) => {
     listFilteredRecipes = listFilteredRecipes.filter((recipe) => {
-      return recipe.ingredients.some(
-        ({ ingredient }) => ingredient.toLowerCase() === tagIngredient
-      );
+      return recipe.ingredients.some(({ ingredient }) => ingredient.toLowerCase() === tagIngredient);
     });
   });
 
@@ -237,9 +223,7 @@ const filterRecipes = () => {
 
   tagsUstensil.forEach((tagUstensil) => {
     listFilteredRecipes = listFilteredRecipes.filter((recipe) => {
-      return recipe.ustensils.some(
-        (ustensil) => ustensil.toLowerCase() === tagUstensil
-      );
+      return recipe.ustensils.some((ustensil) => ustensil.toLowerCase() === tagUstensil);
     });
   });
 
@@ -256,13 +240,11 @@ const filterIngredients = (searchIngredient) => {
       .toLowerCase()
       .split(" ")
       .filter((string) => string.length > 0);
-    const filteredIngredients = listFilteredRecipesIngredients.filter(
-      (ingredient) => {
-        return keywords.every((keyword) => {
-          return ingredient.toLowerCase().includes(keyword);
-        });
-      }
-    );
+    const filteredIngredients = listFilteredRecipesIngredients.filter((ingredient) => {
+      return keywords.every((keyword) => {
+        return ingredient.toLowerCase().includes(keyword);
+      });
+    });
     displayAdvancedSearchIngredient(filteredIngredients);
   } else {
     displayAdvancedSearchIngredient(listFilteredRecipesIngredients);
@@ -275,13 +257,11 @@ const filterAppareils = (searchAppareils) => {
       .toLowerCase()
       .split(" ")
       .filter((string) => string.length > 0);
-    const filteredAppareils = listFilteredRecipesAppareils.filter(
-      (ingredient) => {
-        return keywords.every((keyword) => {
-          return ingredient.toLowerCase().includes(keyword);
-        });
-      }
-    );
+    const filteredAppareils = listFilteredRecipesAppareils.filter((ingredient) => {
+      return keywords.every((keyword) => {
+        return ingredient.toLowerCase().includes(keyword);
+      });
+    });
     displayAdvancedSearchAppareil(filteredAppareils);
   } else {
     displayAdvancedSearchAppareil(listFilteredRecipesAppareils);
@@ -294,13 +274,11 @@ const filterUstensiles = (searchUstensiles) => {
       .toLowerCase()
       .split(" ")
       .filter((string) => string.length > 0);
-    const filteredUstensiles = listFilteredRecipesUstensiles.filter(
-      (ingredient) => {
-        return keywords.every((keyword) => {
-          return ingredient.toLowerCase().includes(keyword);
-        });
-      }
-    );
+    const filteredUstensiles = listFilteredRecipesUstensiles.filter((ingredient) => {
+      return keywords.every((keyword) => {
+        return ingredient.toLowerCase().includes(keyword);
+      });
+    });
     displayAdvancedSearchUstensile(filteredUstensiles);
   } else {
     displayAdvancedSearchUstensile(listFilteredRecipesUstensiles);

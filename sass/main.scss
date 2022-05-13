@@ -52,6 +52,7 @@ $color-ustensile: #ed6454;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: 170px;
 }
 
 .recipe {
@@ -124,6 +125,7 @@ $color-ustensile: #ed6454;
 .filters {
   margin-top: 20px;
   display: flex;
+  position: absolute;
 }
 
 // .filter{
@@ -179,6 +181,7 @@ $color-ustensile: #ed6454;
     display: flex;
     align-items: center;
     width: 667px;
+    padding-left: 20px;
     &__input {
       display: block;
       width: 90%;
@@ -186,9 +189,12 @@ $color-ustensile: #ed6454;
       border-radius: 5px;
       background-color: unset;
       border: unset;
+      color: white;
+      font-family: "lato", sans-serif;
+      font-size: 18px;
+      font-weight: 700;
     }
     &__input::placeholder {
-      padding-left: 20px;
       font-family: "lato", sans-serif;
       font-size: 18px;
       font-weight: 700;
@@ -206,7 +212,9 @@ $color-ustensile: #ed6454;
     }
   }
   .keyword-list {
+    padding-inline-start: 20px;
     display: flex;
+    width: 100%;
     li {
       list-style: none;
       display: inline-block;
@@ -218,9 +226,31 @@ $color-ustensile: #ed6454;
 }
 
 .filter__keyword.open .keyword-list {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .keyword-list {
   display: none;
+}
+
+.tag {
+  margin-top: 20px;
+  &__element {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 20px;
+    color: white;
+    border-radius: 5px;
+    &--ingredient {
+      background-color: $color-ingredient;
+    }
+    &--appareil {
+      background-color: $color-appareil;
+    }
+    &--ustensile {
+      background-color: $color-ustensile;
+    }
+  }
 }

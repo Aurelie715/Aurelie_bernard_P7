@@ -1,87 +1,66 @@
 <!DOCTYPE html>
 <html lang="fr">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="/public/css/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&family=Roboto&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&family=Roboto&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- <script src="https://kit.fontawesome.com/2c03516f22.js" crossorigin="anonymous"></script> -->
     <script src="./scripts/index.js" defer></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="header">
-        <img src="./assets/logo-les-petits-plats.png" alt="logo les petits plats">
-        <h1>Les petits plats</h1>
+      <img src="./assets/logo-les-petits-plats.png" alt="logo les petits plats" />
+      <h1>Les petits plats</h1>
     </header>
     <main class="main">
-        <form class="search">
-            <input type="search" placeholder="Rechercher une recette" name="search" class="search__bar">
-            <button type="submit" class="search__icon"><i class="fa fa-search"></i></button>
-        </form>
-        <div class="tag">
-
+      <form class="search">
+        <input type="search" placeholder="Rechercher une recette" name="search" class="search__bar" />
+        <button type="submit" class="search__icon"><i class="fa fa-search"></i></button>
+      </form>
+      <div class="tag"></div>
+      <div class="filters">
+        <div class="filter__keyword filter__keyword--ingredients">
+          <div class="keyword-search">
+            <span class="keyword-search__btn">Ingredients</span>
+            <input type="text" class="keyword-search__input" placeholder="Rechercher un ingredient" name="search-input-ingredients" id="search-input-ingredients" />
+            <div class="keyword-search__icon">
+              <i class="fa-solid fa-angle-down"></i>
+              <i class="fa-solid fa-angle-up"></i>
+            </div>
+          </div>
+          <ul class="keyword-list" id="list-ingredient"></ul>
         </div>
-        <div class="filters">
-            <div class="filter__keyword filter__keyword--ingredients">
-                <div class="keyword-search">
-                    <span class="keyword-search__btn">Ingredients</span>
-                    <input type="text" class="keyword-search__input" placeholder="Rechercher un ingredient"
-                        name="search-input-ingredients" id="search-input-ingredients" />
-                    <div class="keyword-search__icon">
-                        <i class="fa-solid fa-angle-down"></i>
-                        <i class="fa-solid fa-angle-up"></i>
-                    </div>
-                </div>
-                <ul class="keyword-list" id="list-ingredient">
-
-                </ul>
+        <div class="filter__keyword filter__keyword--appareils">
+          <div class="keyword-search">
+            <span class="keyword-search__btn">Appareils</span>
+            <input type="text" class="keyword-search__input" placeholder="Rechercher un Appareil" name="search-input-appareils" id="search-input-appareils" />
+            <div class="keyword-search__icon">
+              <i class="fa-solid fa-angle-down"></i>
+              <i class="fa-solid fa-angle-up"></i>
             </div>
-            <div class="filter__keyword filter__keyword--appareils">
-                <div class="keyword-search">
-                    <span class="keyword-search__btn">Appareils</span>
-                    <input type="text" class="keyword-search__input" placeholder="Rechercher un Appareil"
-                        name="search-input-appareils" id="search-input-appareils" />
-                    <div class="keyword-search__icon">
-                        <i class="fa-solid fa-angle-down"></i>
-                        <i class="fa-solid fa-angle-up"></i>
-                    </div>
-                </div>
-                <ul class="keyword-list" id="list-appareil">
-
-                </ul>
-            </div>
-            <div class="filter__keyword filter__keyword--ustensiles">
-                <div class="keyword-search">
-                    <span class="keyword-search__btn">Ustensiles</span>
-                    <input type="text" class="keyword-search__input" placeholder="Rechercher un Ustensile"
-                        name="search-input-ustensiles" id="search-input-ustensiles" />
-                    <div class="keyword-search__icon">
-                        <i class="fa-solid fa-angle-down"></i>
-                        <i class="fa-solid fa-angle-up"></i>
-                    </div>
-                </div>
-                <ul class="keyword-list" id="list-ustensile">
-
-                </ul>
-            </div>
-
-
+          </div>
+          <ul class="keyword-list" id="list-appareil"></ul>
         </div>
-        <section class="recipes">
-
-        </section>
+        <div class="filter__keyword filter__keyword--ustensiles">
+          <div class="keyword-search">
+            <span class="keyword-search__btn">Ustensiles</span>
+            <input type="text" class="keyword-search__input" placeholder="Rechercher un Ustensile" name="search-input-ustensiles" id="search-input-ustensiles" />
+            <div class="keyword-search__icon">
+              <i class="fa-solid fa-angle-down"></i>
+              <i class="fa-solid fa-angle-up"></i>
+            </div>
+          </div>
+          <ul class="keyword-list" id="list-ustensile"></ul>
+        </div>
+      </div>
+      <section class="recipes"></section>
     </main>
-</body>
-
+  </body>
 </html>
