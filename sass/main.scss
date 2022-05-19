@@ -42,9 +42,9 @@ $color-ustensile: #ed6454;
     border-radius: 5px;
   }
   &__icon {
-    margin-left: -10px;
+    margin-left: -69px;
     font-size: 32px;
-    padding-right: 18px;
+    // padding-right: 18px;
   }
 }
 
@@ -241,6 +241,8 @@ $color-ustensile: #ed6454;
     display: inline-block;
     padding: 10px 20px;
     margin-right: 20px;
+    font-family: "lato", sans-serif;
+    font-weight: 700;
     color: white;
     border-radius: 5px;
     &--ingredient {
@@ -253,4 +255,8 @@ $color-ustensile: #ed6454;
       background-color: $color-ustensile;
     }
   }
+}
+
+.fa-regular {
+  margin-left: 13px;
 }

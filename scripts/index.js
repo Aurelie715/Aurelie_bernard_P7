@@ -77,6 +77,7 @@ function addTagIngredient(name) {
     const tag = document.querySelector(".tag");
     const templateTagIngredient = document.createElement("div");
     templateTagIngredient.innerHTML = `<div class="tag__element tag__element--ingredient">${name}<i class="fa-regular fa-circle-xmark"></i></div>`;
+    //event to remove tag
     templateTagIngredient.querySelector(".fa-regular").addEventListener("click", (event) => {
       tagsIngredient.splice(tagsIngredient.indexOf(name), 1);
       event.currentTarget.closest(".tag__element").remove();
@@ -103,8 +104,14 @@ function addTagAppareil(name) {
   if (tagsAppareil.indexOf(name) === -1) {
     tagsAppareil.push(name);
     const tag = document.querySelector(".tag");
-    const templateTagAppareil = `<div class="tag__element tag__element--appareil">${name}<i class="fa-regular fa-circle-xmark"></i></div>`;
-    tag.insertAdjacentHTML("beforeend", templateTagAppareil);
+    const templateTagAppareil = document.createElement("div");
+    templateTagAppareil.innerHTML = `<div class="tag__element tag__element--appareil">${name}<i class="fa-regular fa-circle-xmark"></i></div>`;
+    templateTagAppareil.querySelector(".fa-regular").addEventListener("click", (event) => {
+      tagsAppareil.splice(tagsIngredient.indexOf(name), 1);
+      event.currentTarget.closest(".tag__element").remove();
+      filterRecipes();
+    });
+    tag.appendChild(templateTagAppareil.firstChild);
     filterRecipes();
   }
 }
@@ -126,8 +133,14 @@ function addTagUstensile(name) {
   if (tagsUstensil.indexOf(name) === -1) {
     tagsUstensil.push(name);
     const tag = document.querySelector(".tag");
-    const templateTagUstensile = `<div class="tag__element tag__element--ustensile">${name}<i class="fa-regular fa-circle-xmark"></i></div>`;
-    tag.insertAdjacentHTML("beforeend", templateTagUstensile);
+    const templateTagUstensile = document.createElement("div");
+    templateTagUstensile.innerHTML = `<div class="tag__element tag__element--ustensile">${name}<i class="fa-regular fa-circle-xmark"></i></div>`;
+    templateTagUstensile.querySelector(".fa-regular").addEventListener("click", (event) => {
+      tagsUstensil.splice(tagsUstensil.indexOf(name), 1);
+      event.currentTarget.closest(".tag__element").remove();
+      filterRecipes();
+    });
+    tag.appendChild(templateTagUstensile.firstChild);
     filterRecipes();
   }
 }
@@ -139,6 +152,11 @@ function openCloseDropdownButtons() {
     button.addEventListener("click", () => {
       dropdown.classList.toggle("open");
     });
+  });
+  document.body.addEventListener("click", (event) => {
+    if (document.body.contains(event.target) && !event.target.closest(".filter__keyword")) {
+      dropdowns.forEach((dropdown) => dropdown.classList.remove("open"));
+    }
   });
 }
 
