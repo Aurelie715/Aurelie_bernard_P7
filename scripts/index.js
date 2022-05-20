@@ -26,6 +26,7 @@ function displayRecipes(recipes) {
     const { name, ingredients, time, description } = recipe;
     const listeIngredients = ingredients.map(({ ingredient, quantity, unit }) => `<li>${ingredient}: <span>${quantity ?? ""} ${unit ?? ""}</span></li>`).join("");
     const templateRecipeSection = `
+    <h2>test</h2>
     <article class="recipe">
       <div class="recipe__img">
       </div>
