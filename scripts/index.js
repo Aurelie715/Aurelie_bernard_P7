@@ -194,20 +194,20 @@ const filterRecipes = () => {
     return;
   }
 
-  // si la longueur de event.target.value
-  // (ce que l'on a tapé dans la barre de recherche
-  // event -> keyup, target -> input, value -> valeur de l'input)
-  // est plus grand ou égal à 3
-  // searchValue = la valeur de l'input en minuscule
   listFilteredRecipes = allRecipes;
   if (searchString.length >= 3) {
-    const keywords = searchString
-      .toLowerCase()
-      // split scinde searchValue en plusieurs chaine de caractère
-      //(nouvelle chaine chaque fois qu'il y a un espace) et les places dans un tableau
-      .split(" ")
-      // supprime les chaines vides dans le tableau
-      .filter((string) => string.length > 0);
+    // .filter((string) => string.length > 0);
+    // .toLowerCase()
+    // split scinde searchString en plusieurs chaine de caractère
+    //(nouvelle chaine chaque fois qu'il y a un espace) et les places dans un tableau
+    // .split(" ");
+    // supprime les chaines vides dans le tableau
+    const keywords = [];
+    for (const keyword of searchString.toLowerCase().split(" ")) {
+      if (keyword.length > 0) {
+        keywords.push(keyword);
+      }
+    }
     // retourne un nouveau tableau contenant toutes les recettes incluant la valeur de l'input
     listFilteredRecipes = allRecipes.filter((recipe) => {
       // vérifie que la recette inclut chaque mot clef du tableau
@@ -215,7 +215,7 @@ const filterRecipes = () => {
         return (
           // le nom de la recette en minuscule inclut le mot clef
           recipe.name.toLowerCase().includes(keyword) || //ou
-          // la description de la recette en minuscule le mot clef
+          // la description de la recette en minuscule inclut le mot clef
           recipe.description.toLowerCase().includes(keyword) || //ou
           // dans le tableau des ingredients teste si au moins un ingredient du tableau
           recipe.ingredients.some(({ ingredient }) =>
