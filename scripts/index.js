@@ -26,7 +26,6 @@ function displayRecipes(recipes) {
     const { name, ingredients, time, description } = recipe;
     const listeIngredients = ingredients.map(({ ingredient, quantity, unit }) => `<li>${ingredient}: <span>${quantity ?? ""} ${unit ?? ""}</span></li>`).join("");
     const templateRecipeSection = `
-    <h2>test</h2>
     <article class="recipe">
       <div class="recipe__img">
       </div>
@@ -185,6 +184,20 @@ const initSearchBar = () => {
   });
 };
 
+const recipeContainsKeyword = (recipe, keyword) => {
+  if (recipe.name.toLowerCase().includes(keyword) || recipe.description.toLowerCase().includes(keyword)) {
+    return true;
+  }
+
+  for (const { ingredient } of recipe.ingredients) {
+    if (ingredient.toLowerCase().includes(keyword)) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 const filterRecipes = () => {
   if (searchString.length < 3 && tagsIngredient.length === 0 && tagsAppareil.length === 0 && tagsUstensil.length === 0) {
     getKeywordsAdvancedSearch(allRecipes);
@@ -210,22 +223,23 @@ const filterRecipes = () => {
       }
     }
     // retourne un nouveau tableau contenant toutes les recettes incluant la valeur de l'input
-    listFilteredRecipes = allRecipes.filter((recipe) => {
-      // vérifie que la recette inclut chaque mot clef du tableau
-      return keywords.every((keyword) => {
-        return (
-          // le nom de la recette en minuscule inclut le mot clef
-          recipe.name.toLowerCase().includes(keyword) || //ou
-          // la description de la recette en minuscule inclut le mot clef
-          recipe.description.toLowerCase().includes(keyword) || //ou
-          // dans le tableau des ingredients teste si au moins un ingredient du tableau
-          recipe.ingredients.some(({ ingredient }) =>
-            // en minuscule inclut le mot clef
-            ingredient.toLowerCase().includes(keyword)
-          )
-        );
-      });
-    });
+    listFilteredRecipes = [];
+    for (const recipe of allRecipes) {
+      let matches = true;
+      for (const keyword of keywords) {
+        if (!recipeContainsKeyword(recipe, keyword)) {
+          matches = false;
+          break;
+        }
+      }
+      // const matches = keywords.every((keyword) => {
+      //   return recipeContainsKeyword(recipe, keyword);
+      // });
+
+      if (matches) {
+        listFilteredRecipes.push(recipe);
+      }
+    }
   }
 
   tagsIngredient.forEach((tagIngredient) => {
