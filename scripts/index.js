@@ -21,9 +21,12 @@ function displayRecipes(recipes) {
     chercher « tarte aux pommes », « poisson », etc</p>`;
     return;
   }
+  //vide la section recette
   recipesSection.innerHTML = "";
   recipes.forEach((recipe) => {
     const { name, ingredients, time, description } = recipe;
+    // ?? opérateur de coalescence des nuls : renvoie son opérande de droite lorsque son opérande de gauche vaut null ou undefined et qui renvoie son opérande de gauche sinon
+    // map parcourt le tableau ingredients
     const listeIngredients = ingredients.map(({ ingredient, quantity, unit }) => `<li>${ingredient}: <span>${quantity ?? ""} ${unit ?? ""}</span></li>`).join("");
     const templateRecipeSection = `
     <article class="recipe">
@@ -62,7 +65,10 @@ const getKeywordsAdvancedSearch = (recipes) => {
 function displayAdvancedSearchIngredient(ingredients) {
   const keywordListIngredient = document.getElementById("list-ingredient");
   keywordListIngredient.innerHTML = "";
-  const ingredientHTML = ingredients.map((ingredient) => `<li>${ingredient.toLowerCase()}</li>`).join("");
+  const ingredientHTML = ingredients
+    .filter((ingredient) => !tagsIngredient.includes(ingredient.toLowerCase()))
+    .map((ingredient) => `<li>${ingredient.toLowerCase()}</li>`)
+    .join("");
   keywordListIngredient.insertAdjacentHTML("beforeend", ingredientHTML);
   keywordListIngredient.querySelectorAll("li").forEach((ingredient) => {
     ingredient.addEventListener("click", () => {
@@ -91,7 +97,10 @@ function addTagIngredient(name) {
 function displayAdvancedSearchAppareil(appareils) {
   const keywordListAppareil = document.getElementById("list-appareil");
   keywordListAppareil.innerHTML = "";
-  const appareilHTML = appareils.map((appliance) => `<li>${appliance.toLowerCase()}</li>`).join("");
+  const appareilHTML = appareils
+    .filter((appliance) => !tagsAppareil.includes(appliance.toLowerCase()))
+    .map((appliance) => `<li>${appliance.toLowerCase()}</li>`)
+    .join("");
   keywordListAppareil.insertAdjacentHTML("beforeend", appareilHTML);
   keywordListAppareil.querySelectorAll("li").forEach((appliance) => {
     appliance.addEventListener("click", () => {
@@ -120,7 +129,10 @@ function displayAdvancedSearchUstensile(ustensiles) {
   const keywordListUstensile = document.getElementById("list-ustensile");
   keywordListUstensile.innerHTML = "";
 
-  const ustensilHTML = ustensiles.map((ustensil) => `<li>${ustensil.toLowerCase()}</li>`).join("");
+  const ustensilHTML = ustensiles
+    .filter((ustensil) => !tagsUstensil.includes(ustensil.toLowerCase()))
+    .map((ustensil) => `<li>${ustensil.toLowerCase()}</li>`)
+    .join("");
   keywordListUstensile.insertAdjacentHTML("beforeend", ustensilHTML);
   keywordListUstensile.querySelectorAll("li").forEach((ustensil) => {
     ustensil.addEventListener("click", () => {
@@ -210,19 +222,12 @@ const filterRecipes = () => {
 
   listFilteredRecipes = allRecipes;
   if (searchString.length >= 3) {
-    // .filter((string) => string.length > 0);
-    // .toLowerCase()
-    // split scinde searchString en plusieurs chaine de caractère
-    //(nouvelle chaine chaque fois qu'il y a un espace) et les places dans un tableau
-    // .split(" ");
-    // supprime les chaines vides dans le tableau
     const keywords = [];
     for (const keyword of searchString.toLowerCase().split(" ")) {
       if (keyword.length > 0) {
         keywords.push(keyword);
       }
     }
-    // retourne un nouveau tableau contenant toutes les recettes incluant la valeur de l'input
     listFilteredRecipes = [];
     for (const recipe of allRecipes) {
       let matches = true;
@@ -232,10 +237,6 @@ const filterRecipes = () => {
           break;
         }
       }
-      // const matches = keywords.every((keyword) => {
-      //   return recipeContainsKeyword(recipe, keyword);
-      // });
-
       if (matches) {
         listFilteredRecipes.push(recipe);
       }
