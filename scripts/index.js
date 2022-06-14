@@ -62,7 +62,10 @@ const getKeywordsAdvancedSearch = (recipes) => {
 function displayAdvancedSearchIngredient(ingredients) {
   const keywordListIngredient = document.getElementById("list-ingredient");
   keywordListIngredient.innerHTML = "";
-  const ingredientHTML = ingredients.map((ingredient) => `<li>${ingredient.toLowerCase()}</li>`).join("");
+  const ingredientHTML = ingredients
+    .filter((ingredient) => !tagsIngredient.includes(ingredient.toLowerCase()))
+    .map((ingredient) => `<li>${ingredient.toLowerCase()}</li>`)
+    .join("");
   keywordListIngredient.insertAdjacentHTML("beforeend", ingredientHTML);
   keywordListIngredient.querySelectorAll("li").forEach((ingredient) => {
     ingredient.addEventListener("click", () => {
@@ -91,7 +94,10 @@ function addTagIngredient(name) {
 function displayAdvancedSearchAppareil(appareils) {
   const keywordListAppareil = document.getElementById("list-appareil");
   keywordListAppareil.innerHTML = "";
-  const appareilHTML = appareils.map((appliance) => `<li>${appliance.toLowerCase()}</li>`).join("");
+  const appareilHTML = appareils
+    .filter((appliance) => !tagsAppareil.includes(appliance.toLowerCase()))
+    .map((appliance) => `<li>${appliance.toLowerCase()}</li>`)
+    .join("");
   keywordListAppareil.insertAdjacentHTML("beforeend", appareilHTML);
   keywordListAppareil.querySelectorAll("li").forEach((appliance) => {
     appliance.addEventListener("click", () => {
@@ -120,7 +126,10 @@ function displayAdvancedSearchUstensile(ustensiles) {
   const keywordListUstensile = document.getElementById("list-ustensile");
   keywordListUstensile.innerHTML = "";
 
-  const ustensilHTML = ustensiles.map((ustensil) => `<li>${ustensil.toLowerCase()}</li>`).join("");
+  const ustensilHTML = ustensiles
+    .filter((ustensil) => !tagsUstensil.includes(ustensil.toLowerCase()))
+    .map((ustensil) => `<li>${ustensil.toLowerCase()}</li>`)
+    .join("");
   keywordListUstensile.insertAdjacentHTML("beforeend", ustensilHTML);
   keywordListUstensile.querySelectorAll("li").forEach((ustensil) => {
     ustensil.addEventListener("click", () => {
@@ -194,11 +203,6 @@ const filterRecipes = () => {
     return;
   }
 
-  // si la longueur de event.target.value
-  // (ce que l'on a tapé dans la barre de recherche
-  // event -> keyup, target -> input, value -> valeur de l'input)
-  // est plus grand ou égal à 3
-  // searchValue = la valeur de l'input en minuscule
   listFilteredRecipes = allRecipes;
   if (searchString.length >= 3) {
     const keywords = searchString
@@ -212,17 +216,7 @@ const filterRecipes = () => {
     listFilteredRecipes = allRecipes.filter((recipe) => {
       // vérifie que la recette inclut chaque mot clef du tableau
       return keywords.every((keyword) => {
-        return (
-          // le nom de la recette en minuscule inclut le mot clef
-          recipe.name.toLowerCase().includes(keyword) || //ou
-          // la description de la recette en minuscule le mot clef
-          recipe.description.toLowerCase().includes(keyword) || //ou
-          // dans le tableau des ingredients teste si au moins un ingredient du tableau
-          recipe.ingredients.some(({ ingredient }) =>
-            // en minuscule inclut le mot clef
-            ingredient.toLowerCase().includes(keyword)
-          )
-        );
+        return recipe.name.toLowerCase().includes(keyword) || recipe.description.toLowerCase().includes(keyword) || recipe.ingredients.some(({ ingredient }) => ingredient.toLowerCase().includes(keyword));
       });
     });
   }
