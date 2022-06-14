@@ -201,8 +201,9 @@ const recipeContainsKeyword = (recipe, keyword) => {
     return true;
   }
 
-  for (const { ingredient } of recipe.ingredients) {
-    if (ingredient.toLowerCase().includes(keyword)) {
+  // for (const { ingredient } of recipe.ingredients) {
+  for (let i = 0; i < recipe.ingredients.length; i++) {
+    if (recipe.ingredients[i].ingredient.toLowerCase().includes(keyword)) {
       return true;
     }
   }
@@ -223,22 +224,27 @@ const filterRecipes = () => {
   listFilteredRecipes = allRecipes;
   if (searchString.length >= 3) {
     const keywords = [];
-    for (const keyword of searchString.toLowerCase().split(" ")) {
-      if (keyword.length > 0) {
-        keywords.push(keyword);
+    const separateStrings = searchString.toLowerCase().split(" ");
+    // for (const keyword of searchString.toLowerCase().split(" ")) {
+    for (let i = 0; i < separateStrings.length; i++) {
+      if (separateStrings[i].length > 0) {
+        keywords.push(separateStrings[i]);
       }
     }
     listFilteredRecipes = [];
-    for (const recipe of allRecipes) {
+    // for (const recipe of allRecipes) {
+    for (let i = 0; i < allRecipes.length; i++) {
       let matches = true;
-      for (const keyword of keywords) {
-        if (!recipeContainsKeyword(recipe, keyword)) {
+      // for (const keyword of keywords) {
+      for (let j = 0; j < keywords.length; j++) {
+        if (!recipeContainsKeyword(allRecipes[i], keywords[j])) {
           matches = false;
           break;
         }
+        console.log(keywords[j]);
       }
       if (matches) {
-        listFilteredRecipes.push(recipe);
+        listFilteredRecipes.push(allRecipes[i]);
       }
     }
   }
